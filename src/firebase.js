@@ -34,6 +34,7 @@ export const DB = () => {
 
 	const register = async (name, email, password)=> {
 		await auth.createUserWithEmailAndPassword(email, password)
+	
 		return auth.currentUser.updateProfile({
 			displayName: name
 		})

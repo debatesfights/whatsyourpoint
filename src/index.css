@@ -16,4 +16,8 @@ code {
     monospace;
 }
 
+.selectedLink{
+  font-weight: bold;
+}
+
 

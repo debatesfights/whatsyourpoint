@@ -9,7 +9,6 @@ export const Register = ()=> {
 
     return(
     <React.Fragment>
-        <p>Current user:{username}</p>
         <input value={name} onChange={e=>setName(e.target.value)}></input>
         <input value={email} onChange={e=>setEmail(e.target.value)}></input>
         <input value={password} onChange={e=>setPassword(e.target.value)}></input>

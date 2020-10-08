@@ -1,34 +1,36 @@
 import React, { useEffect }  from 'react';
-import {Switch,  Link, Route, BrowserRouter as Router}  from 'react-router-dom'
+import {Switch,   NavLink, Route, BrowserRouter as Router}  from 'react-router-dom'
 
 import  {DB} from './firebase';
 import {FirebaseContext} from './firebaseContext'  
 import {Register} from "./register"
 import {Login} from "./login"
+import NewChat from "./newChat"
+import {Home} from "./home"
  
 const Nav = () => 
       <nav>
-            <Link to="/">Home | </Link>
-            <Link to="register">Register | </Link>
-            <Link to="login">Login</Link>
+            <NavLink activeClassName='selectedLink' to="/">Home | </NavLink>
+            <NavLink activeClassName='selectedLink' to="register">Register | </NavLink>
+            <NavLink activeClassName='selectedLink' to="login">Login | </NavLink>
+            <NavLink activeClassName='selectedLink' to="new">New</NavLink>
       </nav>
-
-
-const Home= ()=> <h2>Home</h2>
-
 
 export const  App  = () => {
       const db = DB()
-      const {isInitialized} =  db
+      const {isInitialized, username} =  db
       useEffect(()=>isInitialized,[])
+
       return (
       <Router>
       <Nav/>
+      <p>Current user:{username}</p>
       <Switch>
             <FirebaseContext.Provider value={db}>
             <Route exact path="/" component={Home}></Route>
             <Route path="/register" component ={Register}></Route>
             <Route path="/login" component={Login}></Route>
+            <Route path="/new" component={NewChat}></Route>
             </FirebaseContext.Provider>
             </Switch>
       </Router>)

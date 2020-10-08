@@ -8,7 +8,7 @@ export const Login= ()=> {
 
     return(
     <React.Fragment>
-        <p>Current user:{username}</p>
+      
         <input value={email} onChange={e=>setEmail(e.target.value)}></input>
         <input value={password} onChange={e=>setPassword(e.target.value)}></input>
         <button onClick={()=>login(email,password)}>Login</button>

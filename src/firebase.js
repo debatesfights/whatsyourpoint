@@ -1,5 +1,9 @@
-import app from 'firebase/app'
-import 'firebase/auth'
+
+import app from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+ 
+
 import 'firebase/firebase-firestore'
 import React, {useState} from "react"
 
@@ -16,9 +20,11 @@ const config = {
 app.initializeApp(config)
 
 export const DB = () => {	
+
 	const auth = app.auth()
+	const db = app.database()
 	const [username, setUsername] = useState()
-	
+
 	const login =  async(email, password) => {
 		console.log(`Firebase login called with:${email} ${password}`)
 		await auth.signInWithEmailAndPassword(email, password)
@@ -46,7 +52,16 @@ export const DB = () => {
 		})
 	}
 
-	return { login, logout ,register, isInitialized , username}
+	const create = async(newChat) =>{
+		db.ref("chats").push(newChat)
+	}
+
+	const getChatsRef = () =>{
+		return db.ref("chats").orderByKey().limitToLast(1000);
+	
+	}
+ 
+	return { login, logout ,register, isInitialized , username, create, getChatsRef}
 
 }
 

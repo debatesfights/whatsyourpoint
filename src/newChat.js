@@ -19,7 +19,7 @@ const NewChat = () => {
 
     if (!username) {return <Redirect to="login"/>}
     return (<React.Fragment>
-        <h3>new chat:{username}</h3>
+       
         <form>
             {Object.keys(initValues).map( (key) =>
             <div key={key}><input style={{display:"block"}} onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            

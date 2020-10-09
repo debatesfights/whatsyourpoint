@@ -1,5 +1,40 @@
 
 .selectedLink{
   font-weight: bold;
+  background-color:  #3c99dc;
+}
+
+body{
+background: #e7e9bb;
+}
+
+input,  button , a{
+  display: block;
+  border-radius: 20px;
+  padding: 5px 8px;
+  color: #333;
+  box-shadow: 
+      inset 0 2px 0 rgba(0,0,0,.2), 
+      0 0 4px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+a{
+  display:inline;
+}
+
+button , a{
+  background-color:  #4CAF50;
+  color:#e7e9bb;
+}
+
+
+input:focus {
+  outline: none;
+  box-shadow: 
+      inset 0 2px 0 rgba(0,0,0,.2), 
+      0 0 4px rgba(0,0,0,0.1), 
+      0 0 5px 1px #51CBEE;
 }
 

@@ -20,7 +20,7 @@ const config = {
 app.initializeApp(config)
 
 export const DB = () => {	
-
+	console.log("db .........")
 	const auth = app.auth()
 	const db = app.database()
 	const [username, setUsername] = useState()
@@ -38,7 +38,7 @@ export const DB = () => {
 		return auth.signOut()
 	}
 
-	const register = async (name, email, password)=> {
+	const register = async (email, password)=> {
 		await auth.createUserWithEmailAndPassword(email, password)	
 	}
 
@@ -54,10 +54,13 @@ export const DB = () => {
 
 	const getChatsRef = () =>{
 		return db.ref("chats").orderByKey().limitToLast(1000);
-	
+	}
+
+	const getChatRef = (id) =>{
+		return db.ref("chats").child(id)
 	}
  
-	return { login, logout ,register, isInitialized , username, create, getChatsRef}
+	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRef}
 
 }
 

@@ -29,7 +29,7 @@ export const DB = () => {
 		console.log(`Firebase login called with:${email} ${password}`)
 		await auth.signInWithEmailAndPassword(email, password)
 		if (auth.currentUser) {
-			setUsername(auth.currentUser.displayName)
+			setUsername(auth.currentUser.email)
 		}
 	}
 
@@ -39,11 +39,7 @@ export const DB = () => {
 	}
 
 	const register = async (name, email, password)=> {
-		await auth.createUserWithEmailAndPassword(email, password)
-	
-		return auth.currentUser.updateProfile({
-			displayName: name
-		})
+		await auth.createUserWithEmailAndPassword(email, password)	
 	}
 
 	const isInitialized = () => {

@@ -20,9 +20,28 @@ input,  button , a{
   margin-left: 1rem;
 }
 
-a{
+a {
   display:inline;
 }
+
+
+nav{
+  margin-bottom: 1rem;
+}
+
+.navbar-right{
+    position: absolute;
+    top: 0px;
+    right: 15px;
+}
+
+.navbar-right-el{
+  display:inline;
+}
+.error{
+  color:#e84855;
+}
+
 
 button , a{
   background-color:  #4CAF50;

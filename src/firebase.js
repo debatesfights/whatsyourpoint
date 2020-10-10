@@ -18,32 +18,38 @@ const config = {
   appId: "1:364331969790:web:5359c5e81b7f5cb4f749af"
 }
 app.initializeApp(config)
+const auth = app.auth()
+const db = app.database()
 
 export const DB = () => {	
-	console.log("db .........")
-	const auth = app.auth()
-	const db = app.database()
+
 	const [username, setUsername] = useState()
+		console.log("db .........")
+	const [error, setError] = useState()
 
 	const login =  async(email, password) => {
-		console.log(`Firebase login called with:${email} ${password}`)
-		await auth.signInWithEmailAndPassword(email, password)
+		setError("")
+		await auth.signInWithEmailAndPassword(email, password).catch((err)=>setError(err.message))
 		if (auth.currentUser) {
 			setUsername(auth.currentUser.email)
 		}
+
 	}
 
 	const logout = () =>  {
-		setUsername("logged out .....")
+		setUsername("")
 		return auth.signOut()
 	}
 
 	const register = async (email, password)=> {
-		await auth.createUserWithEmailAndPassword(email, password)	
+		setError("")
+		await auth.createUserWithEmailAndPassword(email, password).catch((err)=>setError(err.message))	
 	}
 
 	const isInitialized = () => {
+
 		return new Promise(resolve => {
+		
 			auth.onAuthStateChanged(resolve)
 		})
 	}
@@ -60,7 +66,7 @@ export const DB = () => {
 		return db.ref("chats").child(id)
 	}
  
-	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRef}
+	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRef, error}
 
 }
 

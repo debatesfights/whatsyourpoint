@@ -4,12 +4,12 @@ import {FirebaseContext} from './firebaseContext'
 
 export const Challenge = () =>{
     console.log("Challenge .....")
-    const {getChatRef} = useContext(FirebaseContext)
     const chat_id = window.location.pathname.split("/")[window.location.pathname.split("/").length -1]
-    const chatRef = getChatRef(chat_id)
-
     const initValues ={title:"", manifest:"", date:""}
     const [values, setValues] = useState(initValues)
+
+    const {getChatRef} = useContext(FirebaseContext)
+    const chatRef = getChatRef(chat_id)
     
     const handleChange = (e) =>{
         const {name, value} = e.target

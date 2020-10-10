@@ -7,6 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {Redirect, useHistory} from 'react-router-dom'
+
 
 export const Home = ()=> {
     const [chats, setChats] = useState([])
@@ -21,14 +23,15 @@ export const Home = ()=> {
     },[])
 
     const columns_names = ['title','manifest','username','date']
+    let history = useHistory()
+
+    const clickHandler = ({path, chat})=>{
+        history.push(`${path}/${chat.id}`)
+    }
 
     const ButtonCell = ({chat, path,icon}) =>
     (<TableCell align="left">
-      <button onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href=`${path}/${chat.id}`;
-                        }}
-                >
+      <button onClick={()=>clickHandler({path, chat})}>
          <span>{icon}</span>
         </button>
         </TableCell>)
@@ -39,13 +42,13 @@ export const Home = ()=> {
       <TableHead>
           <TableRow key={'i'}>
            {columns_names.map((title) =>
-           <TableCell align="left">{title}&nbsp;</TableCell>)}
+           <TableCell key={title} align="left">{title}&nbsp;</TableCell>)}
           </TableRow>
         </TableHead>
         <TableBody>
           {chats.map((chat) => (
             <TableRow key={chat.id}>
-                {columns_names.map((column)=><TableCell align="left">{chat[column]}</TableCell>)}
+                {columns_names.map((column)=><TableCell key={column} align="left">{chat[column]}</TableCell>)}
             <ButtonCell icon={'\uD83D\uDC40'} path='peep' chat={chat}/>
             <ButtonCell icon={'\u2694\uFE0F'} path='challenge' chat={chat} />             
             </TableRow>

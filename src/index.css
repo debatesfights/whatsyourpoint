@@ -1,4 +1,6 @@
-
+*{
+  font-family: Tahoma;
+}
 .selectedLink{
   font-weight: bold;
   background-color:  #3c99dc;
@@ -24,7 +26,9 @@ a {
   display:inline;
 }
 
-
+th{
+  font-weight: bold !important;
+}
 nav{
   margin-bottom: 1rem;
 }
@@ -33,6 +37,11 @@ nav{
     position: absolute;
     top: 0px;
     right: 15px;
+}
+
+.titles{
+  display:inline;
+  color:  #3c99dc;
 }
 
 .navbar-right-el{

@@ -25,13 +25,10 @@ export const Home = ()=> {
     const columns_names = ['title','manifest','username','date']
     let history = useHistory()
 
-    const clickHandler = ({path, chat})=>{
-        history.push(`${path}/${chat.id}`)
-    }
-
+  
     const ButtonCell = ({chat, path,icon}) =>
     (<TableCell align="left">
-      <button onClick={()=>clickHandler({path, chat})}>
+      <button onClick={()=> history.push(`${path}/${chat.id}`)}>
          <span>{icon}</span>
         </button>
         </TableCell>)

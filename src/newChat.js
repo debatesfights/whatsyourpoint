@@ -3,8 +3,8 @@ import {FirebaseContext} from './firebaseContext'
 import {Redirect} from 'react-router-dom'
 import Moment from "moment"
 
-const NewChat = () => {
 
+const NewChat = () => {
     const {username, create } = useContext(FirebaseContext)   
     const initValues ={title:"", manifest:""}
     
@@ -12,14 +12,14 @@ const NewChat = () => {
     const save =  () =>{
         create({...values, username, date:Moment(new Date()).format('DD/MM/YYYY HH:mm:ss')})
     }
+
     const handleChange = (e) =>{
         const {name, value} = e.target
         setValues({...values, [name]:value})
     }
 
-    if (!username) {return <Redirect to="login"/>}
+
     return (<React.Fragment>
-       
         <form>
             {Object.keys(initValues).map( (key) =>
             <div key={key}><input style={{display:"block"}} onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            

@@ -24,7 +24,6 @@ const db = app.database()
 export const DB = () => {	
 
 	const [username, setUsername] = useState()
-		console.log("db .........")
 	const [error, setError] = useState()
 
 	const login =  async(email, password) => {
@@ -33,7 +32,6 @@ export const DB = () => {
 		if (auth.currentUser) {
 			setUsername(auth.currentUser.email)
 		}
-
 	}
 
 	const logout = () =>  {
@@ -47,26 +45,16 @@ export const DB = () => {
 	}
 
 	const isInitialized = () => {
-
-		return new Promise(resolve => {
-		
+		return new Promise(resolve => {	
 			auth.onAuthStateChanged(resolve)
 		})
 	}
-
-	const create = async(newChat) =>{
-		db.ref("chats").push(newChat)
-	}
-
-	const getChatsRef = () =>{
-		return db.ref("chats").orderByKey().limitToLast(1000);
-	}
-
-	const getChatRef = (id) =>{
-		return db.ref("chats").child(id)
-	}
+	
+	const create = async(newChat) => db.ref("chats").push(newChat)
+	const getChatsRef = () =>  db.ref("chats").orderByKey().limitToLast(1000);
+	const getChatRefMessages = (id) =>db.ref("chats").child(id).child("messages")
  
-	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRef, error}
+	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRefMessages, error}
 
 }
 

@@ -36,9 +36,10 @@ export const  App  = () => {
       <Switch>
             <FirebaseContext.Provider value={db}>
             <Route exact path="/" component={Home}></Route>
-            <Route exact  path="/login" component={Login}></Route>
-            <Route  path="/new" component={NewChat}></Route>
-            <Route  exact path="/challenge/:id" component={Challenge}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/new" component={NewChat}></Route>
+            <Route exact path="/challenge/:id" render={(props) => <Challenge {...props} peep={false}/>}></Route>
+            <Route exact path="/peep/:id" render={(props) => <Challenge {...props} peep={true}/>}></Route>
             </FirebaseContext.Provider>
             </Switch>
       </Router>)

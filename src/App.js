@@ -33,7 +33,9 @@ export const  App  = () => {
       const { username, logout} =  db
 
       return (
+      
       <Router>
+            <h2 className="main_title">Make Your Point</h2>
       <Nav user={username} logout={logout}/>
       
       <Switch>

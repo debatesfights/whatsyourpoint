@@ -11,7 +11,7 @@ const NewChat = () => {
     const history = useHistory()
     const [values, setValues] = useState(initValues)
     const save =  () =>{
-        create({...values, username, date:Moment(new Date()).format('DD/MM/YYYY HH:mm:ss')})
+        create({...values, username,  status:0, date:Moment(new Date()).format('DD/MM/YYYY HH:mm:ss')})
         history.push("/")
     }
 

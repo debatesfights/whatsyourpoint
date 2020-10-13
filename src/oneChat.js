@@ -6,48 +6,47 @@ import Confirm from "./confirm"
 export const OneChat = ({peep}) =>{
     const chat_id = window.location.pathname.split("/")[window.location.pathname.split("/").length -1]
     const [messages, setMessages] = useState([])
-    const {getChatRefMessages, username} = useContext(FirebaseContext)
+    const {getChatRefMessages, username, getChatRef} = useContext(FirebaseContext)
     const messagesRef = getChatRefMessages(chat_id)
-    const manifest = sessionStorage.getItem("manifest")
-    const chatUsername = sessionStorage.getItem("username")
+    const chatRef = getChatRef(chat_id)
+    const [chat, setChat] = useState()
 
-    const getMsgClassName= () =>{
-        return "aaa"
-    }
     const sendMessage =(e)=>{       
         if (e.key ==='Enter'){
             messagesRef.push( {"text":e.target.value, "user":username});
             e.target.value = ""
+            chatRef.update({"status":1 , "challenger":username})
         }
-    }
-
-    useEffect(()=>{
+    }   
+    
+    useEffect( ()=>{
+        chatRef.on("value", snapshot =>  setChat(snapshot.val()))
         messagesRef.on('child_added',  snapshot =>
-         setMessages(messages=>[...messages,snapshot.val()])        )
+         setMessages(messages=>[...messages,snapshot.val()]))
+         
     },[])
-
-    let r = <p>loading....</p>    
+    
     const getClassName= (msg_username) => {
         let msgClass = "message"
-        msgClass = msg_username === chatUsername ?  msgClass + " blue"  : msgClass + " red"
+        msgClass = msg_username === chat.username ?  msgClass + " blue"  : msgClass + " red"
         return msgClass
     }
 
-
-    if (messages){
+    let r = <p>loading....</p>    
+    if (messages && chat){
         r =  (<React.Fragment> 
-        <h3 className="titles">{manifest}</h3>
+        <h3 className="titles">{chat.manifest}</h3>
         <ul>{messages.map((msg, ix) =>
-        <li 
-        className={getClassName(msg.user)} key={ix}>
-            {msg.text}</li>)}</ul>
+        <li className={getClassName(msg.user)} key={ix}>{msg.text}</li>)}</ul>
         {!peep && <input className="new_massege" onKeyDown={sendMessage}></input>} 
+        {!peep && username === chat.username && chat.status === 0  && <Confirm message="You cant start debate with yourself"/>}
         </React.Fragment>)
     }
 
     if (!peep && !username){
-        r = <Confirm />
+        r = <Confirm message="Please login"/>
     }
-  
+ 
+
     return r
 }

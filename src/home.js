@@ -12,7 +12,7 @@ import { useHistory} from 'react-router-dom'
 
 export const Home = ()=> {
     const [chats, setChats] = useState([])
-    const {getChatsRef} = useContext(FirebaseContext)
+    const {getChatsRef, username} = useContext(FirebaseContext)
     const chatsRef = getChatsRef()
     
     useEffect(()=>{
@@ -22,7 +22,7 @@ export const Home = ()=> {
         })
     },[])
 
-    const columns_names = ['title','manifest','username','date']
+    const columns_names = ['title','manifest','username','date', 'challenger']
     let history = useHistory()
   
     const ButtonCell = ({chat, path,icon}) =>
@@ -51,7 +51,7 @@ export const Home = ()=> {
             <TableRow key={chat.id}>
                 {columns_names.map((column)=><TableCell key={column} align="left">{chat[column]}</TableCell>)}
             <ButtonCell icon={'\uD83D\uDC40'} path='peep' chat={chat}/>
-            <ButtonCell icon={'\u2694\uFE0F'} path='onechat' chat={chat} />             
+            <ButtonCell icon={'\u2694\uFE0F'} path='onechat' chat={chat} />
             </TableRow>
           ))}
         </TableBody>

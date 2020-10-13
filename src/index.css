@@ -41,7 +41,6 @@ nav{
 
 .titles{
   display:inline;
-  color:  #3c99dc;
 }
 
 .navbar-right-el{
@@ -51,12 +50,10 @@ nav{
   color:#e84855;
 }
 
-
 button , a{
   background-color:  #4CAF50;
   color:#e7e9bb;
 }
-
 
 input:focus {
   outline: none;
@@ -66,6 +63,22 @@ input:focus {
       0 0 5px 1px #51CBEE;
 }
 
-.massege{
+.new_massege{
   width: 30%;
+}
+
+.message{
+  border-radius: 20px;
+  padding: 5px 8px;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  border-width: 1rem;
+}
+
+.blue{ background-color:   #51CBEE;}
+.red {background-color:  #e84855;}
+
+ul {
+  list-style-type: none;
 }

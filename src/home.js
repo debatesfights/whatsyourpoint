@@ -51,7 +51,7 @@ export const Home = ()=> {
             <TableRow key={chat.id}>
                 {columns_names.map((column)=><TableCell key={column} align="left">{chat[column]}</TableCell>)}
             <ButtonCell icon={'\uD83D\uDC40'} path='peep' chat={chat}/>
-            <ButtonCell icon={'\u2694\uFE0F'} path='chat' chat={chat} />             
+            <ButtonCell icon={'\u2694\uFE0F'} path='onechat' chat={chat} />             
             </TableRow>
           ))}
         </TableBody>

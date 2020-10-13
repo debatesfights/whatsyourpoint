@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext }  from 'react';
+import React, { useState,  useContext }  from 'react';
 import {FirebaseContext} from './firebaseContext'  
 import Moment from "moment"
 import Confirm from "./confirm"
@@ -22,7 +22,7 @@ const NewChat = () => {
         { !username  && <Confirm/>}        
         <form>
             {Object.keys(initValues).map( (key) =>
-            <div key={key}><input className="massege" onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            
+            <div key={key}><input className="new_massege" onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            
             )}   
         </form>
         <button onClick={save}>Save</button>

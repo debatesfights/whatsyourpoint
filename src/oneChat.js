@@ -9,7 +9,8 @@ export const OneChat = ({peep}) =>{
     const {getChatRefMessages, username} = useContext(FirebaseContext)
     const messagesRef = getChatRefMessages(chat_id)
     const manifest = sessionStorage.getItem("manifest")
-    
+    const chatUsername = sessionStorage.getItem("username")
+
     const getMsgClassName= () =>{
         return "aaa"
     }
@@ -26,21 +27,27 @@ export const OneChat = ({peep}) =>{
     },[])
 
     let r = <p>loading....</p>    
+    const getClassName= (msg_username) => {
+        let msgClass = "message"
+        msgClass = msg_username === chatUsername ?  msgClass + " blue"  : msgClass + " red"
+        return msgClass
+    }
+
 
     if (messages){
         r =  (<React.Fragment> 
         <h3 className="titles">{manifest}</h3>
-        <ul>{messages.map((msg, ix) =><li className={getMsgClassName()} key={ix}>{msg.text}</li>)}</ul>
-        {!peep && <input className="massege" onKeyDown={sendMessage}></input>} 
+        <ul>{messages.map((msg, ix) =>
+        <li 
+        className={getClassName(msg.user)} key={ix}>
+            {msg.text}</li>)}</ul>
+        {!peep && <input className="new_massege" onKeyDown={sendMessage}></input>} 
         </React.Fragment>)
     }
 
     if (!peep && !username){
         r = <Confirm />
     }
-
-    if (!peep && username == sessionStorage.getItem("username")){
-        r = <Confirm message="One cannot debate himself"/>   
-    }
+  
     return r
 }

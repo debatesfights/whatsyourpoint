@@ -52,9 +52,10 @@ export const DB = () => {
 	
 	const create = async(newChat) => db.ref("chats").push(newChat)
 	const getChatsRef = () =>  db.ref("chats").orderByKey().limitToLast(1000);
+	const getChatRef = (id) =>  db.ref("chats").child(id)
 	const getChatRefMessages = (id) =>db.ref("chats").child(id).child("messages")
  
-	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRefMessages, error}
+	return { login, logout ,register, isInitialized , username, create, getChatsRef, getChatRefMessages, error,getChatRef, setError}
 
 }
 

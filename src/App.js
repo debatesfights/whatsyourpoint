@@ -6,8 +6,11 @@ import {FirebaseContext} from './firebaseContext'
 import {Login} from "./login"
 import NewChat from "./newChat"
 import {Home} from "./home"
-import {Challenge} from "./challenge"
+import {OneChat} from "./oneChat"
  
+
+
+
 const Nav = ({user, logout}) => 
       <nav>
             <NavLink activeClassName='selectedLink' exact to="/">Home </NavLink>   
@@ -38,8 +41,8 @@ export const  App  = () => {
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/new" component={NewChat}></Route>
-            <Route exact path="/challenge/:id" render={(props) => <Challenge {...props} peep={false}/>}></Route>
-            <Route exact path="/peep/:id" render={(props) => <Challenge {...props} peep={true}/>}></Route>
+            <Route exact path="/oneChat/:id" render={(props) => <OneChat {...props} peep={false}/>}></Route>
+            <Route exact path="/peep/:id" render={(props) => <OneChat {...props} peep={true}/>}></Route>
             </FirebaseContext.Provider>
             </Switch>
       </Router>)

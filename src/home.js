@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {Redirect, useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 
 
 export const Home = ()=> {
@@ -24,11 +24,15 @@ export const Home = ()=> {
 
     const columns_names = ['title','manifest','username','date']
     let history = useHistory()
-
   
     const ButtonCell = ({chat, path,icon}) =>
     (<TableCell align="left">
-      <button onClick={()=> history.push(`${path}/${chat.id}`)}>
+      <button 
+        onClick={()=> {
+        sessionStorage.setItem('manifest', chat.manifest)
+        sessionStorage.setItem('username', chat.username)
+        return history.push(`${path}/${chat.id}`)}
+        }>
          <span>{icon}</span>
         </button>
         </TableCell>)
@@ -47,7 +51,7 @@ export const Home = ()=> {
             <TableRow key={chat.id}>
                 {columns_names.map((column)=><TableCell key={column} align="left">{chat[column]}</TableCell>)}
             <ButtonCell icon={'\uD83D\uDC40'} path='peep' chat={chat}/>
-            <ButtonCell icon={'\u2694\uFE0F'} path='challenge' chat={chat} />             
+            <ButtonCell icon={'\u2694\uFE0F'} path='chat' chat={chat} />             
             </TableRow>
           ))}
         </TableBody>

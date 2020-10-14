@@ -20,7 +20,7 @@ def home():
 while True:
     home()
     
-
+    user = abs(user-1)
     # login page:
     login_button = browser.find_element_by_id("loginnav")
     login_button.click()
@@ -29,7 +29,7 @@ while True:
     inputs =  browser.find_elements_by_tag_name("input")
     time.sleep(1)
     inputs[0].clear()
-    inputs[0].send_keys(users[abs(user-1)])
+    inputs[0].send_keys(users[user])
     time.sleep(2)
 
     inputs[1].clear()

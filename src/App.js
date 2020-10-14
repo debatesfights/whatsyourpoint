@@ -17,9 +17,9 @@ const Nav = ({user, logout}) =>
             <NavLink activeClassName='selectedLink' to="/new">New</NavLink>
             {user && <p className="navbar-right">
                         <div className="navbar-right-el">{user}</div>
-                        <button className="navbar-right-el" onClick={()=>logout()}>Logout</button>
+                        <button id="logout" className="navbar-right-el" onClick={()=>logout()}>Logout</button>
                   </p>}
-            {!user && <NavLink exact className="navbar-right" activeClassName='selectedLink' to="/login">Login</NavLink>}
+            {!user && <NavLink id="loginnav" exact className="navbar-right" activeClassName='selectedLink' to="/login">Login</NavLink>}
       </nav>
 
 

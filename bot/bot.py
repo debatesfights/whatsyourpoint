@@ -4,64 +4,73 @@ import time
 import random
 from selenium.webdriver.common.keys import Keys
 
+interval = 10
 
 users = ["wyp1@gmail.com","wyp2@gmail.com"]
-browser  = webdriver.Chrome("/Users/admin/git/whatsyourpoint/bot/chromedriver")
+browser = webdriver.Chrome("/Users/admin/git/whatsyourpoint/bot/chromedriver")
 time.sleep(2)
+browser.get("http://localhost:3000")
 #home.page
-try:
-    while True:
-        browser.get("http://localhost:3000")
-        login_button = browser.find_element_by_partial_link_text("ogin")
-        login_button.click()
-        time.sleep(1)
+user = 0
+def home():
+    home_button = browser.find_element_by_partial_link_text("ome")
+    home_button.click()
+    time.sleep(2)
 
-        # login page:
-        inputs =  browser.find_elements_by_tag_name("input")
-        time.sleep(1)
-        inputs[0].clear()
-        inputs[0].send_keys(users[random.randint(0,1)])
+while True:
+    home()
+    
 
-        time.sleep(1)
-        inputs[1].clear()
-        inputs[1].send_keys("Wypwyp12") 
+    # login page:
+    login_button = browser.find_element_by_id("loginnav")
+    login_button.click()
+    time.sleep(2)
+    
+    inputs =  browser.find_elements_by_tag_name("input")
+    time.sleep(1)
+    inputs[0].clear()
+    inputs[0].send_keys(users[abs(user-1)])
+    time.sleep(2)
 
-        time.sleep(2)
-        login_button = browser.find_element_by_id("login")
-        
-        time.sleep(2)
-        login_button.click()
-
-        time.sleep(2)
-        home_button = browser.find_element_by_partial_link_text("ome")
-        home_button.click()
-
-        # views
-        peep_buttons = browser.find_elements_by_css_selector(".peep")
-        peep_buttons[random.randint(0,1)].click()
-        time.sleep(2)
-        home_button.click()
-        time.sleep(2)
-
-        # views
-        chat_buttons = browser.find_elements_by_css_selector(".onechat")
-        chat_buttons[random.randint(0,1)].click()
-        time.sleep(2)
-
-        new_message = browser.find_elements_by_css_selector(".new_message")[0]
-        time.sleep(2)
-        lines = []
-
-        with open("quotes.txt",'r') as f:
-            lines = f.read().split("\n")
-
-        new_message.clear()
-        new_message.send_keys(lines[random.randint(1,1500)])
-        new_message.send_keys(Keys.ENTER)
+    inputs[1].clear()
+    inputs[1].send_keys("Wypwyp12") 
+    time.sleep(1)
+    login_button = browser.find_element_by_id("login")
+    login_button.click()
+    time.sleep(2)
+    
 
 
-        time.sleep(2)
-except Exception as e:
-    browser.close()
-    raise e
+    home()
+
+    # views
+    peep_buttons = browser.find_elements_by_css_selector(".peep")
+    peep_buttons[random.randint(0,1)].click()
+    time.sleep(2)
+
+    home()
+
+    # fight
+    chat_buttons = browser.find_elements_by_css_selector(".onechat")
+    chat_buttons[random.randint(0,1)].click()
+    time.sleep(1)
+    new_message = browser.find_elements_by_css_selector(".new_message")[0]
+    time.sleep(1)
+    lines = []
+    with open("quotes.txt",'r') as f:
+        lines = f.read().split("\n")
+    new_message.clear()
+    new_message.send_keys(lines[random.randint(1,1500)])
+    time.sleep(1)
+    new_message.send_keys(Keys.ENTER)
+
+    home()
+
+    #logout
+    time.sleep(2)
+    logout_button = browser.find_element_by_id("logout")
+    logout_button.click()
+
+
+    time.sleep(interval)
 browser.close()

@@ -10,19 +10,26 @@ export const OneChat = ({peep}) =>{
     const messagesRef = getChatRefMessages(chat_id)
     const chatRef = getChatRef(chat_id)
     const [chat, setChat] = useState()
+    const [bottom, setBottom] = useState()
 
     const sendMessage =(e)=>{       
         if (e.key ==='Enter'){
             messagesRef.push( {"text":e.target.value, "user":username});
             e.target.value = ""
-            chatRef.update({"status":1 , "challenger":username})
+            !chat.challenger && chatRef.update({"status":1 , "challenger":username})
         }
     }   
     
+    useEffect(()=>{
+        setBottom(document.getElementById("bottom"))
+        bottom && bottom.scrollIntoView()
+    },[bottom,setBottom]
+    )
+
     useEffect( ()=>{
         chatRef.on("value", snapshot =>  setChat(snapshot.val()))
         messagesRef.on('child_added',  snapshot =>
-         setMessages(messages=>[...messages,snapshot.val()]))
+        setMessages(messages=>[...messages,snapshot.val()]))
          
     },[])
     
@@ -38,15 +45,16 @@ export const OneChat = ({peep}) =>{
         <h3 className="titles">{chat.manifest}</h3>
         <ul>{messages.map((msg, ix) =>
         <li className={getClassName(msg.user)} key={ix}>{msg.text}</li>)}</ul>
+        <div><spam id="bottom"></spam></div>
         {!peep && <input className="new_message" onKeyDown={sendMessage}></input>} 
         {!peep && username === chat.username && chat.status === 0  && <Confirm message="You cant start debate with yourself"/>}
-        </React.Fragment>)
+        
+</React.Fragment>)
     }
-
+ 
     if (!peep && !username){
         r = <Confirm message="Please login"/>
     }
  
-
     return r
 }

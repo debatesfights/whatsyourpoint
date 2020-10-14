@@ -38,7 +38,7 @@ export const OneChat = ({peep}) =>{
         <h3 className="titles">{chat.manifest}</h3>
         <ul>{messages.map((msg, ix) =>
         <li className={getClassName(msg.user)} key={ix}>{msg.text}</li>)}</ul>
-        {!peep && <input className="new_massege" onKeyDown={sendMessage}></input>} 
+        {!peep && <input className="new_message" onKeyDown={sendMessage}></input>} 
         {!peep && username === chat.username && chat.status === 0  && <Confirm message="You cant start debate with yourself"/>}
         </React.Fragment>)
     }

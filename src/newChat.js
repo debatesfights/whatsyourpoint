@@ -25,7 +25,7 @@ const NewChat = () => {
         <form>
             <p>Make your point:</p>
             {Object.keys(initValues).map( (key) =>
-            <div key={key}><input className="new_massege" onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            
+            <div key={key}><input className="new_message" onChange={handleChange} name={key} placeholder={key} value={values[key]}></input></div>            
             )}   
         </form>
         <button onClick={save}>Save</button>

@@ -12,7 +12,7 @@ import { useHistory} from 'react-router-dom'
 
 export const Home = ()=> {
     const [chats, setChats] = useState([])
-    const {getChatsRef, getChatRef} = useContext(FirebaseContext)
+    const {getChatsRef, getChatRef, username} = useContext(FirebaseContext)
     const chatsRef = getChatsRef()
     
     useEffect(()=>{
@@ -27,10 +27,10 @@ export const Home = ()=> {
   
     const ButtonCell = ({chat, path,icon}) =>
     (<TableCell align="left">
-      <button 
+      <button className={path}
         onClick={()=> {
           const views = chat.views !== undefined ? chat.views + 1:1
-          path == "peep" && getChatRef(chat.id).update({"views":views})
+          path === "peep" && getChatRef(chat.id).update({"views":views})
           return history.push(`${path}/${chat.id}`)}
         }>
          <span>{icon}</span>
@@ -51,7 +51,8 @@ export const Home = ()=> {
             <TableRow key={chat.id}>
                 {columns_names.map((column)=><TableCell key={column} align="left">{chat[column]}</TableCell>)}
             <ButtonCell icon={'\uD83D\uDC40'} path='peep' chat={chat}/>
-            {!chat.challenger && <ButtonCell icon={'\u2694\uFE0F'} path='onechat' chat={chat} />}
+            {username && (!chat.challenger || chat.challenger === username 
+              || chat.username === username )&& <ButtonCell icon={'\u2694\uFE0F'} path='onechat' chat={chat} />}
             </TableRow>
           ))}
         </TableBody>

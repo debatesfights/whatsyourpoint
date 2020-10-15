@@ -9,7 +9,7 @@ interval = 10
 users = ["wyp1@gmail.com","wyp2@gmail.com"]
 browser = webdriver.Chrome("/Users/admin/git/whatsyourpoint/bot/chromedriver")
 time.sleep(2)
-browser.get("http://localhost:3000")
+browser.get("https://whatsyourpoint.vercel.app/")
 #home.page
 user = 0
 def home():

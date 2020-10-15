@@ -2,7 +2,7 @@
   "name": "whatsyourpoint",
   "version": "0.1.0",
   "private": true,
-  "hompage":"https://debatesfights.github.io/whatsyourpoint/",
+  "hompage": "https://github.com/debatesfights.github.io/whatsyourpoint.git",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -20,8 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

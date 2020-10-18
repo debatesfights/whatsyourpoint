@@ -1,4 +1,8 @@
-*{
+:root{
+ --background :#D0D0D0;
+--main-font:#004142;
+}
+  *{
   font-family: Tahoma;
 }
 .selectedLink{
@@ -7,7 +11,7 @@
 }
 
 body{
-background: #e7e9bb;
+background: var(--background);
 }
 
 input,  button , a{
@@ -76,8 +80,8 @@ input:focus {
   border-width: 1rem;
 }
 
-.blue{ background-color:   #51CBEE;}
-.red {background-color:  #e84855;}
+.blue{ background-color:  var(--main-font) ;color:var(--background);}
+.red {color:  var(--main-font) ;background-color :var(--background);border:solid 1px  var(--main-font)}
 
 ul {
   list-style-type: none;
